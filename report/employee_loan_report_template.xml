@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_employee_loan_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+
+                        <h2 class="text-center">Loan Agreement</h2>
+
+                        <div class="row mt-4">
+                            <div class="col-6">
+                                <strong>Loan Reference:</strong>
+                                <span t-out="doc.name"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Date:</strong>
+                              <span t-esc="doc.create_date.strftime('%Y-%m-%d') if doc.create_date else ''"/>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-6">
+                                <strong>Employee:</strong>
+                                <span t-out="doc.employee_id.name"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Status:</strong>
+                                <span t-out="doc.state"/>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-6">
+                                <strong>Loan Amount:</strong>
+                               <span t-esc="'%.2f' % doc.amount"/>
+                            </div>
+                          <div class="col-6">
+                            <strong>Number of Installments:</strong>
+                            <span t-esc="doc.installments"/>
+                          </div>
+                        </div>
+
+                        <h4 class="mt-4">Installment Schedule</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Due Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                              <t t-foreach="doc.loan_line_ids" t-as="line">
+                                  <tr>
+                                    <td t-esc="line_index + 1"/>
+                                    <td t-esc="str(line.due_date)"/>
+                                    <td t-esc="'%.2f' % line.amount"/>
+                                    <td t-esc="line.state"/>
+                                </tr>
+                            </t>
+
+                            </tbody>
+                        </table>
+
+                        <div class="row mt-5">
+                            <div class="col-6 text-center">
+                                <p>____________________</p>
+                                <p>Employee Signature</p>
+                            </div>
+                            <div class="col-6 text-center">
+                                <p>____________________</p>
+                                <p>HR Manager Signature</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Approval Email Template -->
+    <record id="email_template_loan_approved" model="mail.template">
+        <field name="name">Loan Approved</field>
+        <field name="model_id" ref="employee_loan.model_employee_loan"/>
+        <field name="subject">Your Loan Request {{ object.name }} has been Approved</field>
+        <field name="body_html" type="html">
+            <p>Dear <t t-out="object.employee_id.name"/>,</p>
+            <p>We are pleased to inform you that your loan request <strong><t t-out="object.name"/></strong>
+            for the amount of <strong><t t-out="object.amount"/></strong> has been <strong>Approved</strong>.</p>
+            <p>Your installments will be deducted from your salary starting next month.</p>
+            <p>Regards,<br/>HR Department</p>
+        </field>
+        <field name="email_to">{{ object.employee_id.work_email }}</field>
+    </record>
+
+    <!-- Rejection Email Template -->
+    <record id="email_template_loan_rejected" model="mail.template">
+        <field name="name">Loan Rejected</field>
+        <field name="model_id" ref="employee_loan.model_employee_loan"/>
+        <field name="subject">Your Loan Request {{ object.name }} has been Rejected</field>
+        <field name="body_html" type="html">
+            <p>Dear <t t-out="object.employee_id.name"/>,</p>
+            <p>We regret to inform you that your loan request <strong><t t-out="object.name"/></strong>
+            has been <strong>Rejected</strong>.</p>
+            <p>Please contact HR for more information.</p>
+            <p>Regards,<br/>HR Department</p>
+        </field>
+        <field name="email_to">{{ object.employee_id.work_email }}</field>
+    </record>
+
+</odoo>
