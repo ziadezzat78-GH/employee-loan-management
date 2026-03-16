@@ -36,4 +36,4 @@ Draft → Confirmed → Approved → Rejected
 
 ## Author
 
-Ziad Waleed - Junior Odoo Developer
+Ziad Ezzat - Junior Odoo Developer
